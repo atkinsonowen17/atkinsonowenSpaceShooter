@@ -5,6 +5,8 @@ public class ShipController : MonoBehaviour
     Rigidbody2D rb;
     public float moveSpeed = 8f;
     public float yLimit = 3.5f;
+    public float fireDelay = 0.3f;
+    public float lastFire;
 
     void Start()
     {
@@ -22,9 +24,10 @@ public class ShipController : MonoBehaviour
         pos.y = Mathf.Clamp(pos.y, -yLimit, yLimit);
         transform.position = pos;
 
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space") && Time.time > lastFire + fireDelay)
         {
             Shoot();
+            lastFire = Time.time;  
         }
     }
 
