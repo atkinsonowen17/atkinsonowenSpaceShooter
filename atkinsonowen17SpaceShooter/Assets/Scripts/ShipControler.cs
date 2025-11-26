@@ -10,6 +10,7 @@ public class ShipController : MonoBehaviour
     public GameObject fireballPrefab;
     public GameObject fireballPrefab2;
     public float bulletSpeed = 10f;
+    public int level;
 
     void Start()
     {
@@ -38,13 +39,40 @@ public class ShipController : MonoBehaviour
     {
         Debug.Log("shoot");
 
-        Vector3 spawnPos = transform.position + Vector3.right * 1.3F;
+        if (level == 3)
+        {
+            Vector3 spawnPos1 = transform.position + Vector3.right * 1.3F;
+            Vector3 spawnPos2 = transform.position + Vector3.right * 1.3F + Vector3.up * 0.3f;
+            Vector3 spawnPos3 = transform.position + Vector3.right * 1.3F + Vector3.up * -0.3f;
 
-        GameObject fireball = Instantiate(fireballPrefab, spawnPos, transform.rotation);
+            GameObject fireball1 = Instantiate(fireballPrefab, spawnPos1, transform.rotation);
+            GameObject fireball2 = Instantiate(fireballPrefab, spawnPos2, transform.rotation * Quaternion.Euler(0, 0, 3));
+            GameObject fireball3 = Instantiate(fireballPrefab, spawnPos3, transform.rotation * Quaternion.Euler(0, 0, -3));
 
-        Destroy(fireball, 1f);
+            Destroy(fireball1, 1f);
+            Destroy(fireball2, 1f);
+            Destroy(fireball3, 1f);
 
-        Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
-        rb.linearVelocity = -transform.up * bulletSpeed;
+            Vector2 upDirection = Quaternion.Euler(0, 0, 3) * Vector2.right;
+            Vector2 downDirection = Quaternion.Euler(0, 0, -3) * Vector2.right;
+
+            Rigidbody2D rb1 = fireball1.GetComponent<Rigidbody2D>();
+            rb1.linearVelocity = -transform.up * bulletSpeed;
+            Rigidbody2D rb2 = fireball2.GetComponent<Rigidbody2D>();
+            rb2.linearVelocity = upDirection * bulletSpeed;
+            Rigidbody2D rb3 = fireball3.GetComponent<Rigidbody2D>();
+            rb3.linearVelocity = downDirection * bulletSpeed;
+        }
+        else {
+
+            Vector3 spawnPos = transform.position + Vector3.right * 1.3F;
+
+            GameObject fireball = Instantiate(fireballPrefab, spawnPos, transform.rotation);
+
+            Destroy(fireball, 1f);
+
+            Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
+            rb.linearVelocity = -transform.up * bulletSpeed;
+        }
     }
 }
