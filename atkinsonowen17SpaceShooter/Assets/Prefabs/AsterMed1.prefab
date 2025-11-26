@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7549908433676220712}
   m_Layer: 0
   m_Name: AsterMed1
-  m_TagString: Untagged
+  m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5417f74eb96255a40bd41a7de50a6aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  points: 5
+  health: 2
+  destroyX: -10
+  moveSpeed: 3
 --- !u!50 &-7549908433676220712
 Rigidbody2D:
   serializedVersion: 5
@@ -116,7 +120,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
