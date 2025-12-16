@@ -4,7 +4,7 @@ public class ShipController : MonoBehaviour
 {
     Rigidbody2D rb;
     public float moveSpeed = 8f;
-    public float yLimit = 3.5f;
+    public float yLimit = 1.5f;
     public float fireDelay = 0.3f;
     public float lastFire;
     public GameObject fireballPrefab;
@@ -37,15 +37,13 @@ public class ShipController : MonoBehaviour
 
     public void Shoot()
     {
-        Debug.Log("shoot");
-
         if (level == 3)
         {
             Vector3 spawnPos1 = transform.position + Vector3.right * 1.3F;
             Vector3 spawnPos2 = transform.position + Vector3.right * 1.3F + Vector3.up * 0.3f;
             Vector3 spawnPos3 = transform.position + Vector3.right * 1.3F + Vector3.up * -0.3f;
 
-            GameObject fireball1 = Instantiate(fireballPrefab, spawnPos1, transform.rotation);
+            GameObject fireball1 = Instantiate(fireballPrefab2, spawnPos1, transform.rotation);
             GameObject fireball2 = Instantiate(fireballPrefab, spawnPos2, transform.rotation * Quaternion.Euler(0, 0, 3));
             GameObject fireball3 = Instantiate(fireballPrefab, spawnPos3, transform.rotation * Quaternion.Euler(0, 0, -3));
 
@@ -63,7 +61,21 @@ public class ShipController : MonoBehaviour
             Rigidbody2D rb3 = fireball3.GetComponent<Rigidbody2D>();
             rb3.linearVelocity = downDirection * bulletSpeed;
         }
-        else {
+        else if (level % 2 == 0) // Even levels use blue fireball
+        { 
+
+            Vector3 spawnPos = transform.position + Vector3.right * 1.3F;
+
+            GameObject fireball = Instantiate(fireballPrefab2, spawnPos, transform.rotation);
+
+            Destroy(fireball, 1f);
+
+            Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
+            rb.linearVelocity = -transform.up * bulletSpeed;
+        }
+        else // Odd levels use red fireball
+        {
+            {
 
             Vector3 spawnPos = transform.position + Vector3.right * 1.3F;
 
@@ -73,6 +85,7 @@ public class ShipController : MonoBehaviour
 
             Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
             rb.linearVelocity = -transform.up * bulletSpeed;
+        }
         }
     }
 }
