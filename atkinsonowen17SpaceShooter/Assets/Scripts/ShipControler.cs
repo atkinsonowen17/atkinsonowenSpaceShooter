@@ -4,7 +4,7 @@ public class ShipController : MonoBehaviour
 {
     Rigidbody2D rb;
     public float moveSpeed = 8f;
-    public float yLimit = 1.5f;
+    public float yLimit = 4f;
     public float fireDelay = 0.3f;
     public float lastFire;
     public GameObject fireballPrefab;
