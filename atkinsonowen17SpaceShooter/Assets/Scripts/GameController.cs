@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {   
@@ -6,6 +7,8 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     private static float health = 3f;
     public static float Health { get => health; set => health = value; }
+    public float score = 0f;
+    public TextMeshProUGUI scoreText;
     void Awake()
     {
         if (instance == null)
@@ -16,6 +19,7 @@ public class GameController : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
+        UpdateScoreUI();
     }
 
     void Update()
@@ -26,11 +30,22 @@ public class GameController : MonoBehaviour
     public void DamagePlayer(float damage)
     {
         health -= damage;
-        Debug.Log("Damage player health:" + health);
         if (Health <= 0)
         {
             // KillPlayer();
         }
 
+    }
+
+    public void AddScore(float points)
+    {
+        score += points;
+        UpdateScoreUI();
+    }
+
+    void UpdateScoreUI()
+    {
+        if (scoreText != null)
+            scoreText.text = "Score: " + score;
     }
 }
