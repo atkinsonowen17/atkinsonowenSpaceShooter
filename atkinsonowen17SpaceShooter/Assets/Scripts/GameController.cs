@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
     public void DamagePlayer(float damage)
     {
         health -= damage;
+        Debug.Log("Damage player health:" + health);
         if (Health <= 0)
         {
             // KillPlayer();

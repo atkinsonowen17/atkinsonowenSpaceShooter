@@ -5,6 +5,7 @@ public class AsteroidController : MonoBehaviour
     public GameObject Player;
     public float points;
     public float health;
+    // public float asteroidHealth { get => health; set => health = value; }
     public float destroyX = -10f;    
     public float moveSpeed;
     private float rotationSpeed;        
@@ -33,5 +34,16 @@ public class AsteroidController : MonoBehaviour
             GameController.instance.DamagePlayer(1);
             Destroy(gameObject);           
         }
+    }
+
+    public void DamageAsteroid(float damage)
+    {
+        health -= damage;
+        Debug.Log("Damage asteroid health:" + health);
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+
     }
 }

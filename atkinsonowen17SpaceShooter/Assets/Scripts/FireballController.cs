@@ -19,8 +19,11 @@ public class FireballController : MonoBehaviour
     {
         if (collision.CompareTag("Asteroid"))
         {
-            Debug.Log("Hit: " + collision.name);
-            Destroy(collision.gameObject); // kill enemy
+            AsteroidController asteroid = collision.GetComponent<AsteroidController>();
+            if (asteroid != null)
+            {
+                asteroid.DamageAsteroid(1f);
+            }
             Destroy(gameObject);           // destroy bullet
         }
     }
