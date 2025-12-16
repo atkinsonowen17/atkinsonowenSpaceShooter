@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class AsteriodController : MonoBehaviour
+public class AsteroidController : MonoBehaviour
 {
+    public GameObject Player;
     public float points;
     public float health;
     public float destroyX = -10f;    
@@ -22,6 +23,15 @@ public class AsteriodController : MonoBehaviour
         if (transform.position.x < destroyX)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            GameController.instance.DamagePlayer(1);
+            Destroy(gameObject);           
         }
     }
 }
