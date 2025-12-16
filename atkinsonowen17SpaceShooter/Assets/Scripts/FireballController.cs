@@ -14,4 +14,14 @@ public class FireballController : MonoBehaviour
     {
         transform.position += Vector3.right * speed * Time.deltaTime;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Asteroid"))
+        {
+            Debug.Log("Hit: " + collision.name);
+            Destroy(collision.gameObject); // kill enemy
+            Destroy(gameObject);           // destroy bullet
+        }
+    }
 }
