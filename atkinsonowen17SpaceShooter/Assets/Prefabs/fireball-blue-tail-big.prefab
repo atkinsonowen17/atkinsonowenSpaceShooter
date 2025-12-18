@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: -2156590622926003249}
   - component: {fileID: 5836242443318585703}
   - component: {fileID: 8353343425693067736}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: fireball-blue-tail-big
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ad397c29505f648b5850c5869ef02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ship: {fileID: 1512782934554904, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
   speed: 5
   lifetime: 0.7
 --- !u!58 &8353343425693067736

@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class FireballController : MonoBehaviour
 {
+    public GameObject ship;
     public float speed = 5f;
     public float lifetime = 0.7f;
+    public float damage = 1f;
 
     void Start()
     {
@@ -22,7 +24,7 @@ public class FireballController : MonoBehaviour
             AsteroidController asteroid = collision.GetComponent<AsteroidController>();
             if (asteroid != null)
             {
-                asteroid.DamageAsteroid(1f);
+                asteroid.DamageAsteroid(damage);
             }
             Destroy(gameObject);           // destroy bullet
         }

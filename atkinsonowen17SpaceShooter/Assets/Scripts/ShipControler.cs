@@ -2,19 +2,20 @@ using UnityEngine;
 
 public class ShipController : MonoBehaviour
 {
-    Rigidbody2D rb;
+    Rigidbody2D shiprb;
     public float moveSpeed = 8f;
     public float yLimit = 4f;
     public float fireDelay = 0.3f;
     public float lastFire;
     public GameObject fireballPrefab;
     public GameObject fireballPrefab2;
+    public GameObject fireballPrefab3;
     public float bulletSpeed = 10f;
     public int level;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        shiprb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -27,6 +28,11 @@ public class ShipController : MonoBehaviour
         Vector3 pos = transform.position;
         pos.y = Mathf.Clamp(pos.y, -yLimit, yLimit);
         transform.position = pos;
+
+        if(level == 5)
+        {
+            fireDelay = 0.6f;
+        }
 
         if (Input.GetKeyDown("space") && Time.time > lastFire + fireDelay)
         {
@@ -60,6 +66,21 @@ public class ShipController : MonoBehaviour
             rb2.linearVelocity = upDirection * bulletSpeed;
             Rigidbody2D rb3 = fireball3.GetComponent<Rigidbody2D>();
             rb3.linearVelocity = downDirection * bulletSpeed;
+        }
+        else if (level == 5) 
+        { 
+            
+            Vector3 spawnPos = transform.position + Vector3.right * 1.3F;
+
+            GameObject fireball = Instantiate(fireballPrefab3, spawnPos, transform.rotation);
+
+            FireballController bullet = fireball.GetComponent<FireballController>();
+            bullet.damage = 5f;
+
+            Destroy(fireball, 1f);
+
+            Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
+            rb.linearVelocity = -transform.up * bulletSpeed;
         }
         else if (level % 2 == 0) // Even levels use blue fireball
         { 
